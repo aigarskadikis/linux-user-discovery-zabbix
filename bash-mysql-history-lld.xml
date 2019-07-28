@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.2</version>
-    <date>2019-07-28T10:01:14Z</date>
+    <date>2019-07-28T18:11:29Z</date>
     <groups>
         <group>
             <name>Templates/Modules</name>
@@ -20,17 +20,7 @@ grep AllowRoot= /etc/zabbix/zabbix_agentd.conf</description>
                     <name>Templates/Modules</name>
                 </group>
             </groups>
-            <applications>
-                <application>
-                    <name>bash history</name>
-                </application>
-                <application>
-                    <name>bash rc</name>
-                </application>
-                <application>
-                    <name>MySQL history</name>
-                </application>
-            </applications>
+            <applications/>
             <items/>
             <discovery_rules>
                 <discovery_rule>
@@ -62,15 +52,15 @@ grep AllowRoot= /etc/zabbix/zabbix_agentd.conf</description>
                         <formula/>
                         <conditions/>
                     </filter>
-                    <lifetime>1d</lifetime>
+                    <lifetime>30d</lifetime>
                     <description/>
                     <item_prototypes>
                         <item_prototype>
-                            <name>backup for {#PATH}/.bash_history</name>
+                            <name>bash history for {#USERNAME}</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>logrt[{#PATH}/.bash_history*,,utf8]</key>
+                            <key>logrt[{#HOMEDIR}/.bash_history*,,utf8]</key>
                             <delay>1s</delay>
                             <history>90d</history>
                             <trends>0</trends>
@@ -95,11 +85,7 @@ grep AllowRoot= /etc/zabbix/zabbix_agentd.conf</description>
                             <port/>
                             <description/>
                             <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>bash history</name>
-                                </application>
-                            </applications>
+                            <applications/>
                             <valuemap/>
                             <logtimefmt/>
                             <preprocessing/>
@@ -122,15 +108,19 @@ grep AllowRoot= /etc/zabbix/zabbix_agentd.conf</description>
                             <ssl_key_password/>
                             <verify_peer>0</verify_peer>
                             <verify_host>0</verify_host>
-                            <application_prototypes/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>bash history backup for {#USERNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
                             <master_item/>
                         </item_prototype>
                         <item_prototype>
-                            <name>backup for {#PATH}/.mysql_history</name>
+                            <name>MySQL history for {#USERNAME}</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>logrt[{#PATH}/.mysql_history*,,utf8]</key>
+                            <key>logrt[{#HOMEDIR}/.mysql_history*,,utf8]</key>
                             <delay>1s</delay>
                             <history>90d</history>
                             <trends>0</trends>
@@ -155,11 +145,7 @@ grep AllowRoot= /etc/zabbix/zabbix_agentd.conf</description>
                             <port/>
                             <description/>
                             <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>MySQL history</name>
-                                </application>
-                            </applications>
+                            <applications/>
                             <valuemap/>
                             <logtimefmt/>
                             <preprocessing/>
@@ -182,15 +168,19 @@ grep AllowRoot= /etc/zabbix/zabbix_agentd.conf</description>
                             <ssl_key_password/>
                             <verify_peer>0</verify_peer>
                             <verify_host>0</verify_host>
-                            <application_prototypes/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>MySQL history backup for {#USERNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
                             <master_item/>
                         </item_prototype>
                         <item_prototype>
-                            <name>backup for {#PATH}/.bashrc</name>
+                            <name>bash startup for {#USERNAME}</name>
                             <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>vfs.file.contents[{#PATH}/.bashrc,utf8]</key>
+                            <key>vfs.file.contents[{#HOMEDIR}/.bashrc,utf8]</key>
                             <delay>4h</delay>
                             <history>90d</history>
                             <trends>0</trends>
@@ -215,11 +205,7 @@ grep AllowRoot= /etc/zabbix/zabbix_agentd.conf</description>
                             <port/>
                             <description/>
                             <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>bash rc</name>
-                                </application>
-                            </applications>
+                            <applications/>
                             <valuemap/>
                             <logtimefmt/>
                             <preprocessing>
@@ -249,7 +235,11 @@ grep AllowRoot= /etc/zabbix/zabbix_agentd.conf</description>
                             <ssl_key_password/>
                             <verify_peer>0</verify_peer>
                             <verify_host>0</verify_host>
-                            <application_prototypes/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>bash startup backup for {#USERNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
                             <master_item/>
                         </item_prototype>
                     </item_prototypes>
@@ -290,13 +280,13 @@ grep AllowRoot= /etc/zabbix/zabbix_agentd.conf</description>
                         </step>
                         <step>
                             <type>21</type>
-                            <params>return value.replace(/:.*:/gm,&quot;\&quot;,\&quot;{#PATH}\&quot;:\&quot;&quot;)</params>
+                            <params>return value.replace(/:.*:/gm,&quot;\&quot;,\&quot;{#HOMEDIR}\&quot;:\&quot;&quot;)</params>
                             <error_handler>0</error_handler>
                             <error_handler_params/>
                         </step>
                         <step>
                             <type>21</type>
-                            <params>return value.replace(/^/gm,&quot;{\&quot;{#USER}\&quot;:\&quot;&quot;)</params>
+                            <params>return value.replace(/^/gm,&quot;{\&quot;{#USERNAME}\&quot;:\&quot;&quot;)</params>
                             <error_handler>0</error_handler>
                             <error_handler_params/>
                         </step>
