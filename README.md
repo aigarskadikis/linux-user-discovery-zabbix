@@ -2,7 +2,7 @@
 
 Utilize the file /etc/passwd and JavaScript preprocessing feature to feed the file into low-level discovery. This will allow us to monitor some files per user profile.
 
-[![IMAGE ALT TEXT](https://i9.ytimg.com/vi/iPLeS1Kq8kk/maxresdefault.jpg?sqp=CNyP-ukF&rs=AOn4CLA-t4xlMGGhfHeCVmg0t1oaNR81eA&time=1564379349868)](https://www.youtube.com/watch?v=iPLeS1Kq8kk "Discover Linux users with Zabbix")
+[![IMAGE ALT TEXT](https://raw.githubusercontent.com/catonrug/linux-user-discovery-zabbix/master/png/youtube-thumbnail.png)](https://www.youtube.com/watch?v=iPLeS1Kq8kk "Discover Linux users with Zabbix")
 
 
 ## Dependencies
